@@ -1,8 +1,9 @@
 "use client";
 
+import run from "@/lib/gemini";
 import React, { createContext, useState } from "react";
 
-export const Context = createContext();
+export const Context = createContext(null);
 const ContextProvider = ({ children }: any) => {
   const [theme, setTheme] = useState("dark");
   const [input, setInput] = useState("");
@@ -23,29 +24,34 @@ const ContextProvider = ({ children }: any) => {
     setResult("");
     setDisplayResult(true);
     setRecentPrompts(input);
+    //console.log(prompt);
 
-    if (input && prompt) {
-      setPrevPrompts((prev) => [...prev, input]);
-    }
-    const response = input ? await runChat(input) : await runChat(prompt);
-    const boldResponse = response.split("**");
-    let newArray = "";
-    for (let i = 0; i < boldResponse.length; i++) {
-      if (i === 0 || i % 2 !== 1) {
-        newArray += boldResponse[i];
-      } else {
-        newArray += "<b>" + boldResponse[i] + "</b>";
+    try {
+      if (input && prompt) {
+        setPrevPrompts((prev) => [...prev, input]);
       }
-    }
-    let newRes = newArray.split("*").join("</br>");
-    let newRes2 = newRes.split(" ");
+      const response = input ? await run(input) : await run(prompt);
+      const boldResponse = response.split("**");
+      let newArray = "";
+      for (let i = 0; i < boldResponse.length; i++) {
+        if (i === 0 || i % 2 !== 1) {
+          newArray += boldResponse[i];
+        } else {
+          newArray += "<b>" + boldResponse[i] + "</b>";
+        }
+      }
+      let newRes = newArray.split("*").join("</br>");
+      let newRes2 = newRes.split(" ");
 
-    for (let i = 0; i < newRes2.length; i++) {
-      const newWord = newRes2[i];
-      paragraphDelay(i, newWord + " ");
+      for (let i = 0; i < newRes2.length; i++) {
+        const newWord = newRes2[i];
+        paragraphDelay(i, newWord + " ");
+      }
+      setLoading(false);
+      setInput("");
+    } catch (error) {
+      console.log(error);
     }
-    setLoading(false);
-    setInput("");
   };
 
   const toggle = () => {

@@ -41,28 +41,28 @@ export default function GeminiBody() {
               <p>How can I help you today?</p>
             </div>
             <div className="grid grid-cols-4 gap-5 p-5">
-              <div className="h-48 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
+              <div className="h-32 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
                 <p>Suggest beautiful places to see on an upcoming road trip</p>
                 <Compass
                   size={35}
                   className="p-1 absolute bottom-2 right-2 bg-bgPrimaryColor text-softTextColor rounded-full"
                 />
               </div>
-              <div className="h-48 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
+              <div className="h-32 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
                 <p>What’s the reaction to and impact of autonomous vehicles</p>
                 <Lightbulb
                   size={35}
                   className="p-1 absolute bottom-2 right-2 bg-bgPrimaryColor text-softTextColor rounded-full"
                 />
               </div>
-              <div className="h-48 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
+              <div className="h-32 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
                 <p>Come up with a recipe for an upcoming event</p>
                 <Youtube
                   size={35}
                   className="p-1 absolute bottom-2 right-2 bg-bgPrimaryColor text-softTextColor rounded-full"
                 />
               </div>
-              <div className="h-48 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
+              <div className="h-32 p-4 bg-bgSecondaryColor rounded-xl relative cursor-pointer">
                 <p>Evaluate and rank common camera categories</p>
                 <Code
                   size={35}
@@ -85,7 +85,7 @@ export default function GeminiBody() {
                 alt="gemini-logo"
               />
               <p
-                className="text-md font-normal loading-6 text-gray-400"
+                className="text-md font-normal loading-6 text-gray-400 mb-10"
                 dangerouslySetInnerHTML={{ __html: result }}
               ></p>
             </div>
@@ -99,10 +99,10 @@ export default function GeminiBody() {
                 value={input}
                 type="text"
                 className="flex-1 bg-transparent border-none outline-none p-2 text-md text-gray-400"
-                placeholder="Enter a prompt here"
+                placeholder="Enter a prompt here..."
               />
               <div className="flex cursor-pointer">
-                <SendHorizontal type="submit" size={20} />
+                <SendHorizontal type="submit" size={20} onClick={submit} />
               </div>
             </div>
           </form>
